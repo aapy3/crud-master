@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { JwModalComponent } from './jw-modal/jw-modal.component';
 import { ModalService } from './modal.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonServiceService } from './common-service.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -13,7 +16,10 @@ import { ModalService } from './modal.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   exports: [JwModalComponent],
   providers: [ModalService],
