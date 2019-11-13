@@ -60,7 +60,6 @@ export class AppComponent {
     else {
       this.commonService.getEmployee().subscribe(
         (response: any) => {
-          console.log(response);
           if (response) {
             this.employeeList = response;
             localStorage.setItem('employeeList', JSON.stringify(this.employeeList))
@@ -122,7 +121,6 @@ export class AppComponent {
     this.registerForm.controls.region_name.setValue(this.currentEmployeeData.region);
     let dob = new Date(this.currentEmployeeData.dob).getFullYear() + '-' + Number(new Date(this.currentEmployeeData.dob).getMonth()) + 1 + '-' + new Date(this.currentEmployeeData.dob).getDate();
     this.registerForm.controls.dob.setValue(dob);
-    console.log(this.registerForm.controls);
   }
 
   resetForm(form: FormGroup) {
@@ -153,7 +151,6 @@ export class AppComponent {
   }
 
   onSubmit(formValue) {
-    console.log(formValue);
     const payload = {
       "jobTitleName": formValue.job_title,
       "firstName": formValue.first_name,
@@ -180,11 +177,9 @@ export class AppComponent {
 
 
     if (this.currentEmployeeData && this.selectedIndex != -1) {
-      console.log('in edit');
       this.employeeList[this.selectedIndex] = payload;
     }
     else {
-      console.log('in add');
       this.employeeList.push(payload);
     }
     localStorage.setItem('employeeList', JSON.stringify(this.employeeList));
@@ -211,7 +206,6 @@ export class AppComponent {
   }
 
   sortByColoumn(property) {
-    console.log(property);
     this.isDesc = !this.isDesc; //change the direction
     this.column = property;
     let direction = this.isDesc ? 1 : -1;
@@ -242,7 +236,6 @@ export class AppComponent {
         }
       }
     });
-    console.log(this.isDesc,this.column);
   };
 
   onChangeProperty() {
@@ -252,18 +245,15 @@ export class AppComponent {
   }
 
   private _filterEmployee(value): [] {
-    console.log(value);
     const filterValue = value.toLowerCase();
     return this.employeeList.filter(employee => employee[this.searchProperty.value].toLowerCase().indexOf(filterValue) === 0);
   }
 
   pagination() {
     // this.skip += this.limit;
-    console.log(this.employeeList, this.limit, this.skip);
     if(this.skip >= 0 && this.skip <= this.employeeList.length - 1){
       let paginatedArray = this.employeeList.slice(this.skip, this.limit + this.skip);
-      this.employeePaginationList = paginatedArray;
-      console.log(paginatedArray);
+      this.employeePaginationList = paginatedArray;      
     }
   }
 
@@ -290,7 +280,6 @@ export class AppComponent {
     let tmp = []
     if (this.searchPropertyValue.value && this.searchPropertyValue.value.length > 2) {
       this.employeeList.forEach(element => {
-        console.log(element);
         if (element[this.searchProperty.value].toLowerCase().indexOf(this.searchPropertyValue.value.toLowerCase()) != -1) {
           tmp.push(element)
         }
