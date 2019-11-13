@@ -3,16 +3,19 @@ table {
     border-collapse: collapse;
     width: 100%;
   }
+
+  thead{
+    z-index: 10;
+  }
   
   td, th {
     border: 1px solid #dddddd;
-    // text-align: left;
     padding: 8px;
   }
   
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
+  // tr:nth-child(even) {
+  //   background-color: #dddddd;
+  // }
 
 
 
@@ -34,7 +37,7 @@ table {
         }
         input {
             height: 38px;
-            width: 100%;
+            width: -webkit-fill-available;
             padding: 0px 11px;
             font-size: 14px;
             border-radius: 4px;
@@ -66,6 +69,7 @@ table {
             width: 20%;
             height: 40px;
             color: white;
+            cursor: pointer;
         }
         button:disabled {
           background: gray;
@@ -138,9 +142,8 @@ table {
 }
 
 .pagination{
-  display: flex;
-  align-items: center;
-  margin-top: 10%;
+  margin-top: 5%;
+  float: right;
 }
 a{
   cursor: pointer;
@@ -153,3 +156,40 @@ a{
   height: 25px;
   margin-left: 2%;
 }
+
+.dropbtn {
+  // background-color: #4CAF50;
+  color: black;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+// .dropdown:hover .dropbtn {background-color: #3e8e41;}

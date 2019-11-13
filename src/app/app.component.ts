@@ -24,6 +24,7 @@ export class AppComponent {
   selectedIndex: any = -1;
   skip: any = 0;
   limit: any = 5;
+  maxDate = new Date().getFullYear() + '-' + Number(new Date().getMonth()) + 1 + '-' + new Date().getDate();
   employeePaginationList: any = [];
   constructor(private modalService: ModalService, private fb: FormBuilder, private commonService: CommonServiceService) {
     this.registerForm = fb.group({
@@ -35,7 +36,7 @@ export class AppComponent {
       'phone_no': ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])],
       'region_name': ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Z0-9_-]*$/)])],
       // 'dob': ['',Validators.compose([Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z0-9_-]*$/)])],
-      'dob': ['']
+      'dob': ['',Validators.compose([Validators.required])]
     });
 
 
@@ -113,13 +114,15 @@ export class AppComponent {
 
   setFormValue() {
     this.registerForm.controls.first_name.setValue(this.currentEmployeeData.firstName);
-    this.registerForm.controls.last_name.setValue(this.currentEmployeeData.lastName)
-    this.registerForm.controls.email.setValue(this.currentEmployeeData.emailAddress)
-    this.registerForm.controls.id.setValue(this.currentEmployeeData.employeeCode)
-    this.registerForm.controls.phone_no.setValue(this.currentEmployeeData.phoneNumber)
-    this.registerForm.controls.job_title.setValue(this.currentEmployeeData.jobTitleName)
-    this.registerForm.controls.region_name.setValue(this.currentEmployeeData.region)
-    this.registerForm.controls.dob.setValue(this.currentEmployeeData.dob);
+    this.registerForm.controls.last_name.setValue(this.currentEmployeeData.lastName);
+    this.registerForm.controls.email.setValue(this.currentEmployeeData.emailAddress);
+    this.registerForm.controls.id.setValue(this.currentEmployeeData.employeeCode);
+    this.registerForm.controls.phone_no.setValue(this.currentEmployeeData.phoneNumber);
+    this.registerForm.controls.job_title.setValue(this.currentEmployeeData.jobTitleName);
+    this.registerForm.controls.region_name.setValue(this.currentEmployeeData.region);
+    let dob = new Date(this.currentEmployeeData.dob).getFullYear() + '-' + Number(new Date(this.currentEmployeeData.dob).getMonth()) + 1 + '-' + new Date(this.currentEmployeeData.dob).getDate();
+    this.registerForm.controls.dob.setValue(dob);
+    console.log(this.registerForm.controls);
   }
 
   resetForm(form: FormGroup) {
@@ -150,7 +153,7 @@ export class AppComponent {
   }
 
   onSubmit(formValue) {
-    console.log(this.selectedIndex, this.currentEmployeeData);
+    console.log(formValue);
     const payload = {
       "jobTitleName": formValue.job_title,
       "firstName": formValue.first_name,
@@ -158,7 +161,8 @@ export class AppComponent {
       "preferredFullName": formValue.first_name + ' ' + formValue.last_name,
       "employeeCode": formValue.id,
       "region": formValue.region_name,
-      "dob": '30/11/1995',
+      // "dob": '30/11/1995',
+      "dob": new Date(formValue.dob).getFullYear() + '-' + Number(new Date(formValue.dob).getMonth()) + 1 + '-' + new Date(formValue.dob).getDate(),
       "phoneNumber": formValue.phone_no,
       "emailAddress": formValue.email
     }
@@ -173,6 +177,8 @@ export class AppComponent {
     //     }, error => {
     //       console.log(error)
     //     });
+
+
     if (this.currentEmployeeData && this.selectedIndex != -1) {
       console.log('in edit');
       this.employeeList[this.selectedIndex] = payload;
@@ -240,7 +246,9 @@ export class AppComponent {
   };
 
   onChangeProperty() {
+    this.skip = 0;
     this.searchPropertyValue.reset();
+    this.pagination();
   }
 
   private _filterEmployee(value): [] {
@@ -260,6 +268,7 @@ export class AppComponent {
   }
 
   setSkip(flag){
+    this.onChangeProperty();
     if(this.limit < this.employeeList.length){
       if(flag){
         this.skip += this.limit;

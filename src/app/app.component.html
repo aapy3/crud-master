@@ -1,12 +1,3 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
 <style>
   :host {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -126,66 +117,69 @@
     </div>
 
     <table>
-      <tr>
-        <th>ID</th>
-        <th (click)="sortByColoumn('preferredFullName')">Full Name 
-          <span class="sortIcon" 
-                        [ngClass]="{'sort': column != 'preferredFullName', 
-                                            'sort-asc': (column == 'preferredFullName' && !isDesc), 
-                                            'sort-desc': (column == 'preferredFullName' && isDesc) }"
-                        aria-hidden="true"> ^ </span>
-
-        </th>
-        <th (click)="sortByColoumn('employeeCode')">Employee Code 
-          <span class="fa sortIcon" 
-                        [ngClass]="{'sort': column != 'employeeCode', 
-                                            'sort-asc': (column == 'employeeCode' && !isDesc), 
-                                            'sort-desc': (column == 'employeeCode' && isDesc) }"
-                        aria-hidden="true"> ^ </span>
-
-        </th>
-        <th (click)="sortByColoumn('jobTitleName')">Job Title 
-          <span class="fa sortIcon" 
-                        [ngClass]="{'sort': column != 'jobTitleName', 
-                                            'sort-asc': (column == 'jobTitleName' && !isDesc), 
-                                            'sort-desc': (column == 'jobTitleName' && isDesc) }"
-                        aria-hidden="true"> ^ </span>
-
-        </th>
-        <th (click)="sortByColoumn('phoneNumber')">Phone Number 
-          <span class="fa sortIcon" 
-                        [ngClass]="{'sort': column != 'phoneNumber', 
-                                            'sort-asc': (column == 'phoneNumber' && !isDesc), 
-                                            'sort-desc': (column == 'phoneNumber' && isDesc) }"
-                        aria-hidden="true"> ^ </span>
-
-        </th>
-        <th (click)="sortByColoumn('emailAddress')">Email ID 
-          <span class="fa sortIcon" 
-                        [ngClass]="{'sort': column != 'emailAddress', 
-                                            'sort-asc': (column == 'emailAddress' && !isDesc), 
-                                            'sort-desc': (column == 'emailAddress' && isDesc) }"
-                        aria-hidden="true"> ^ </span>
-
-        </th>
-        <th (click)="sortByColoumn('region')">Region 
-          <span class="fa sortIcon" 
-                        [ngClass]="{'sort': column != 'region', 
-                                            'sort-asc': (column == 'region' && !isDesc), 
-                                            'sort-desc': (column == 'region' && isDesc) }"
-                        aria-hidden="true"> ^ </span>
-
-        </th>
-        <th (click)="sortByColoumn('dob')">DOB 
-          <span class="fa sortIcon" 
-                        [ngClass]="{'sort': column != 'dob', 
-                                            'sort-asc': (column == 'dob' && !isDesc), 
-                                            'sort-desc': (column == 'dob' && isDesc) }"
-                        aria-hidden="true"> ^ </span>
-
-        </th>
-        <th>Action</th>
-      </tr>
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th (click)="sortByColoumn('preferredFullName')">Full Name 
+                <span class="sortIcon" 
+                              [ngClass]="{'sort': column != 'preferredFullName', 
+                                                  'sort-asc': (column == 'preferredFullName' && !isDesc), 
+                                                  'sort-desc': (column == 'preferredFullName' && isDesc) }"
+                              aria-hidden="true"> ^ </span>
+      
+              </th>
+              <th (click)="sortByColoumn('employeeCode')">Employee Code 
+                <span class="fa sortIcon" 
+                              [ngClass]="{'sort': column != 'employeeCode', 
+                                                  'sort-asc': (column == 'employeeCode' && !isDesc), 
+                                                  'sort-desc': (column == 'employeeCode' && isDesc) }"
+                              aria-hidden="true"> ^ </span>
+      
+              </th>
+              <th (click)="sortByColoumn('jobTitleName')">Job Title 
+                <span class="fa sortIcon" 
+                              [ngClass]="{'sort': column != 'jobTitleName', 
+                                                  'sort-asc': (column == 'jobTitleName' && !isDesc), 
+                                                  'sort-desc': (column == 'jobTitleName' && isDesc) }"
+                              aria-hidden="true"> ^ </span>
+      
+              </th>
+              <th (click)="sortByColoumn('phoneNumber')">Phone Number 
+                <span class="fa sortIcon" 
+                              [ngClass]="{'sort': column != 'phoneNumber', 
+                                                  'sort-asc': (column == 'phoneNumber' && !isDesc), 
+                                                  'sort-desc': (column == 'phoneNumber' && isDesc) }"
+                              aria-hidden="true"> ^ </span>
+      
+              </th>
+              <th (click)="sortByColoumn('emailAddress')">Email ID 
+                <span class="fa sortIcon" 
+                              [ngClass]="{'sort': column != 'emailAddress', 
+                                                  'sort-asc': (column == 'emailAddress' && !isDesc), 
+                                                  'sort-desc': (column == 'emailAddress' && isDesc) }"
+                              aria-hidden="true"> ^ </span>
+      
+              </th>
+              <th (click)="sortByColoumn('region')">Region 
+                <span class="fa sortIcon" 
+                              [ngClass]="{'sort': column != 'region', 
+                                                  'sort-asc': (column == 'region' && !isDesc), 
+                                                  'sort-desc': (column == 'region' && isDesc) }"
+                              aria-hidden="true"> ^ </span>
+      
+              </th>
+              <th (click)="sortByColoumn('dob')">DOB 
+                <span class="fa sortIcon" 
+                              [ngClass]="{'sort': column != 'dob', 
+                                                  'sort-asc': (column == 'dob' && !isDesc), 
+                                                  'sort-desc': (column == 'dob' && isDesc) }"
+                              aria-hidden="true"> ^ </span>
+      
+              </th>
+              <th>Action</th>
+            </tr>
+      </thead>
+     
       <tr *ngFor="let emp of employeePaginationList; let i = index">
         <td>{{i + 1}}</td>
         <td>{{emp.preferredFullName}}</td>
@@ -195,7 +189,7 @@
         <td>{{emp.emailAddress}}</td>
         <td>{{emp.region}}</td>
         <td>{{emp.dob}}</td>
-        <td>
+        <!-- <td>
           <button (click)="editEmployee(emp,i)">
             Edit
           </button>
@@ -205,24 +199,20 @@
           <button (click)="deleteEmployee(emp,i)">
             Delete
           </button>
+        </td> -->
+        <td>
+            <div class="dropdown">
+                <button class="dropbtn">&#9776;</button>
+                <div class="dropdown-content">
+                  <a (click)="editEmployee(emp,i)">Edit</a>
+                  <a (click)="viewEmployee(emp,i)">View</a>
+                  <a (click)="deleteEmployee(emp,i)">Delete</a>
+                </div>
+              </div>
         </td>
       </tr>
 
- <tr class="pagination">
-   <td>
-      <a (click)="setSkip(0)">
-          <
-        </a>
-   </td>
-  <span>
-    Swipe
-  </span>
-  <td>
-      <a (click)="setSkip(1)">
-          >
-        </a>
-  </td>
-</tr>
+
       <tr class="text-center" *ngIf="employeeList.length == 0">
         No Employees in record
       </tr>
@@ -232,6 +222,22 @@
 
 
     </table>
+
+    <div class="pagination">
+        <span>
+           <a (click)="setSkip(0)">
+               <
+             </a>
+        </span>
+       <span>
+         Swipe
+       </span>
+       <span>
+           <a (click)="setSkip(1)">
+               >
+             </a>
+       </span>
+     </div>
 
 
 
@@ -264,7 +270,7 @@
 
           <div class="row50">
             <label>FIRST NAME</label>
-            <input autocomplete="off" formControlName="first_name" type=" text" placeholder="First Name" />
+            <input  autocomplete="off" formControlName="first_name" type=" text" placeholder="First Name" />
             <span class="error-message"
               *ngIf="registerForm.controls['first_name'].errors?.minlength && registerForm.controls['first_name'].touched">
               Minimum three letter required
@@ -280,7 +286,7 @@
           </div>
           <div class="row50">
             <label>LAST NAME</label>
-            <input autocomplete="off" formControlName="last_name" type=" text" name="last_name"
+            <input  autocomplete="off" formControlName="last_name" type=" text" name="last_name"
               placeholder="Last Name" />
             <span class="error-message"
               *ngIf="registerForm.controls['last_name'].errors?.minlength && registerForm.controls['last_name'].touched">
@@ -342,7 +348,7 @@
 
           <div class="row50">
             <label>REGION NAME</label>
-            <input autocomplete="off" formControlName="region_name" type=" text" placeholder="Region Name" />
+            <input  autocomplete="off" formControlName="region_name" type=" text" placeholder="Region Name" />
             <span class="error-message"
               *ngIf="registerForm.controls['region_name'].errors?.minlength && registerForm.controls['region_name'].touched">
               Minimum two letter required
@@ -359,7 +365,9 @@
 
           <div class="row50">
             <label>DOB NAME</label>
-            <input autocomplete="off" formControlName="dob" type=" text" placeholder="DOB" />
+            <!-- <input autocomplete="off" formControlName="dob" type=" text" placeholder="DOB" /> -->
+            <input  id="datefield" type='date' formControlName="dob" max="{{maxDate}}">
+
 
             <span class="error-message"
               *ngIf="registerForm.controls['dob'].errors?.required && registerForm.controls['dob'].touched">
