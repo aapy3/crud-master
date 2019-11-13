@@ -6,7 +6,7 @@ table {
   
   td, th {
     border: 1px solid #dddddd;
-    text-align: left;
+    // text-align: left;
     padding: 8px;
   }
   
@@ -59,16 +59,20 @@ table {
             text-align: left;
             opacity: 0.8;
             font-size: 28px;
-            // strong {
-            //     font-family: $common-font;
-            // }
         }
         button {
-            // font-family: $common-font;
+            background: royalblue;
             font-size: 12.6px;
             width: 20%;
             height: 40px;
+            color: white;
         }
+        button:disabled {
+          background: gray;
+      }
+      .cancel-btn{
+        background: red;
+      }
     }
     .img-block {
         width: 30%;
@@ -113,7 +117,10 @@ table {
 .text-center{
   text-align: center;
 }
-
+.sortIcon {
+  cursor: pointer;
+  display: block;
+}
 .sort-asc{
   -ms-transform: rotate(180deg); /* IE 9 */
   -webkit-transform: rotate(180deg); /* Safari 3-8 */
@@ -128,4 +135,21 @@ table {
 
 .view-table{
   display: flow-root;
+}
+
+.pagination{
+  display: flex;
+  align-items: center;
+  margin-top: 10%;
+}
+a{
+  cursor: pointer;
+}
+
+.inputSearch{
+  height: 30px;
+}
+.inputSearchText{
+  height: 25px;
+  margin-left: 2%;
 }

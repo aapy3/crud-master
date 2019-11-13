@@ -22,6 +22,9 @@ export class AppComponent {
   // employeeList: Observable<any[]>;
   currentEmployeeData: any;
   selectedIndex: any = -1;
+  skip: any = 0;
+  limit: any = 5;
+  employeePaginationList: any = [];
   constructor(private modalService: ModalService, private fb: FormBuilder, private commonService: CommonServiceService) {
     this.registerForm = fb.group({
       'id': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(20)])],
@@ -36,10 +39,10 @@ export class AppComponent {
     });
 
 
-    this.employeeList = this.searchPropertyValue.valueChanges
-      .pipe(
-        map(emp => emp ? this._filterEmployee(emp) : this.employeeList.slice())
-      );
+    // this.employeeList = this.searchPropertyValue.valueChanges
+    //   .pipe(
+    //     map(emp => emp ? this._filterEmployee(emp) : this.employeeList.slice())
+    //   );
   }
 
   ngOnInit() {
@@ -48,19 +51,25 @@ export class AppComponent {
   }
 
   getEmployee() {
-    // this.commonService.getEmployee().subscribe(
-    //   (response: any) => {
-    //     console.log(response);
-    //      if(response) {
-    //        this.employeeList = response;
-    //      }
-    //     }, error => {
-    //       console.log(error)
-    //     });
+
 
     if (localStorage.getItem('employeeList')) {
       this.employeeList = JSON.parse(localStorage.getItem('employeeList'));
     }
+    else {
+      this.commonService.getEmployee().subscribe(
+        (response: any) => {
+          console.log(response);
+          if (response) {
+            this.employeeList = response;
+            localStorage.setItem('employeeList', JSON.stringify(this.employeeList))
+          }
+        }, error => {
+          console.log(error)
+        });
+    }
+    // this.employeePaginationList = this.employeeList;
+    this.pagination();
   }
 
 
@@ -94,6 +103,12 @@ export class AppComponent {
     this.selectedIndex = index;
     this.openModal('create-edit');
     this.setFormValue();
+  }
+
+  createEmployee(id){
+    this.currentEmployeeData = undefined;
+    this.resetForm(this.registerForm);
+    this.openModal(id);
   }
 
   setFormValue() {
@@ -221,9 +236,10 @@ export class AppComponent {
         }
       }
     });
+    console.log(this.isDesc,this.column);
   };
 
-  onChangeProperty(){
+  onChangeProperty() {
     this.searchPropertyValue.reset();
   }
 
@@ -231,6 +247,50 @@ export class AppComponent {
     console.log(value);
     const filterValue = value.toLowerCase();
     return this.employeeList.filter(employee => employee[this.searchProperty.value].toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  pagination() {
+    // this.skip += this.limit;
+    console.log(this.employeeList, this.limit, this.skip);
+    if(this.skip >= 0 && this.skip <= this.employeeList.length - 1){
+      let paginatedArray = this.employeeList.slice(this.skip, this.limit + this.skip);
+      this.employeePaginationList = paginatedArray;
+      console.log(paginatedArray);
+    }
+  }
+
+  setSkip(flag){
+    if(this.limit < this.employeeList.length){
+      if(flag){
+        this.skip += this.limit;
+        if(this.skip > this.employeeList.length - 1){
+          this.skip = this.employeeList.length - 1 ;
+        }
+      }
+      else{
+        this.skip -= this.limit;
+        if(this.skip < 0){
+          this.skip = 0;
+        }
+      }
+      this.pagination();
+    }
+  }
+
+  searchEmployee() {
+    let tmp = []
+    if (this.searchPropertyValue.value && this.searchPropertyValue.value.length > 2) {
+      this.employeeList.forEach(element => {
+        console.log(element);
+        if (element[this.searchProperty.value].toLowerCase().indexOf(this.searchPropertyValue.value.toLowerCase()) != -1) {
+          tmp.push(element)
+        }
+      });
+      this.employeePaginationList = tmp;
+    }
+    else{
+      this.employeePaginationList = this.employeeList;
+    }
   }
 }
 

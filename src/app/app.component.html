@@ -107,11 +107,11 @@
       <h3 class="float-left">
         Employees
       </h3>
-      <button class="float-right create-btn" (click)="openModal('create-edit')">Create Employee</button>
+      <button class="float-right create-btn" (click)="createEmployee('create-edit')">Create Employee</button>
     </div>
 
     <div class="padding-7">
-      <select [formControl]="searchProperty" (change)="onChangeProperty()">
+      <select class="inputSearch" [formControl]="searchProperty" (change)="onChangeProperty()">
         <option value="preferredFullName">Name</option>
         <option value="employeeCode">Employee Code</option>
         <option value="jobTitleName">Job Title Name</option>
@@ -121,7 +121,8 @@
         <option value="dob">DOB</option>
       </select>
 
-      <input autocomplete="off" [formControl]="searchPropertyValue" type=" text" placeholder="Search"/>
+      <input autocomplete="off" (keyup)="searchEmployee()"
+      (keypress)="searchEmployee()" [formControl]="searchPropertyValue" class="inputSearchText" type=" text" placeholder="Search"/>
     </div>
 
     <table>
@@ -185,7 +186,7 @@
         </th>
         <th>Action</th>
       </tr>
-      <tr *ngFor="let emp of employeeList; let i = index">
+      <tr *ngFor="let emp of employeePaginationList; let i = index">
         <td>{{i + 1}}</td>
         <td>{{emp.preferredFullName}}</td>
         <td>{{emp.employeeCode}}</td>
@@ -206,6 +207,22 @@
           </button>
         </td>
       </tr>
+
+ <tr class="pagination">
+   <td>
+      <a (click)="setSkip(0)">
+          <
+        </a>
+   </td>
+  <span>
+    Swipe
+  </span>
+  <td>
+      <a (click)="setSkip(1)">
+          >
+        </a>
+  </td>
+</tr>
       <tr class="text-center" *ngIf="employeeList.length == 0">
         No Employees in record
       </tr>
@@ -325,7 +342,7 @@
 
           <div class="row50">
             <label>REGION NAME</label>
-            <input autocomplete="off" formControlName="region_name" type=" text" placeholder="REGION Name" />
+            <input autocomplete="off" formControlName="region_name" type=" text" placeholder="Region Name" />
             <span class="error-message"
               *ngIf="registerForm.controls['region_name'].errors?.minlength && registerForm.controls['region_name'].touched">
               Minimum two letter required
@@ -360,7 +377,7 @@
           <div style="margin-top:15px" class="row100">
             <button type="submit" class="formFullWidth" (click)="onSubmit(registerForm.value)"
               [disabled]="!registerForm.valid">Save</button>
-            <button (click)="closeModal('create-edit');">Close</button>
+            <button class="cancel-btn" (click)="closeModal('create-edit');">Close</button>
           </div>
 
         </form>
@@ -430,7 +447,7 @@
         </div>
 
         <div style="margin-top:15px" class="row100">
-            <button (click)="closeModal('view');">Close</button>
+            <button class="cancel-btn" (click)="closeModal('view');">Close</button>
           </div>
       </div>
     </div>
@@ -449,7 +466,7 @@
 
         <div style="margin-top:15px" class="row100">
           <button type="submit" class="formFullWidth" (click)="delete()">Delete</button>
-          <button (click)="closeModal('delete');">Close</button>
+          <button class="cancel-btn" (click)="closeModal('delete');">Close</button>
         </div>
 
       </div>
