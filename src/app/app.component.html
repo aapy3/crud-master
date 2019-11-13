@@ -247,7 +247,7 @@
 
   <!-- Create and Edit Employee -->
   <jw-modal id="create-edit">
-    <h1>{{currentEmployeeData ? 'Edit' : 'Create'}} Employee</h1>
+    <h2>{{currentEmployeeData ? 'Edit' : 'Create'}} Employee</h2>
     <hr>
     <div class="auth-main">
 
@@ -401,7 +401,7 @@
           <label>{{currentEmployeeData.employeeCode}}</label>
         </h4>
         <br>
-        <h1>{{currentEmployeeData.preferredFullName}}</h1>
+        <h2>{{currentEmployeeData.preferredFullName}}</h2>
         <hr>
         <div class="view-table text-center">
             <div class="row50">
@@ -464,7 +464,7 @@
 
   <!-- Delete Employee -->
   <jw-modal id="delete">
-    <h1>Delete Employee</h1>
+    <h2>Delete Employee</h2>
     <hr>
     <div class="auth-main" *ngIf="currentEmployeeData">
       <div class="auth-block ">
