@@ -287,8 +287,8 @@ export class AppComponent {
       this.employeePaginationList = tmp;
     }
     else{
-      this.employeePaginationList = this.employeeList;
-    }
+      this.pagination();
+    }    
   }
 }
 
