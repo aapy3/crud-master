@@ -217,7 +217,7 @@ export class AppComponent {
     let direction = this.isDesc ? 1 : -1;
 
 
-    this.employeeList.sort(function (a, b) {
+    this.employeePaginationList.sort(function (a, b) {
 
       if (property == 'preferredFullName' || property == 'emailAddress') {
         if (a[property].toLowerCase() < b[property].toLowerCase()) {
