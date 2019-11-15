@@ -62,6 +62,7 @@ export class AppComponent {
         (response: any) => {
           if (response) {
             this.employeeList = response;
+            this.employeePaginationList = this.employeeList;
             localStorage.setItem('employeeList', JSON.stringify(this.employeeList))
           }
         }, error => {
